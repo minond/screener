@@ -1,0 +1,31 @@
+{
+    "google": [
+        "https://www.google.com/",
+        {
+            "set value of search field": [
+                {
+                    "value": [
+                        "input[name=q]",
+                        "PhantomJS"
+                    ]
+                },
+                {
+                    "css": [
+                        "input[name=q]",
+                        "border",
+                        "2px solid red"
+                    ]
+                }
+            ],
+            "color all divs in page": [
+                {
+                    "css": [
+                        "div",
+                        "background-color",
+                        "blue"
+                    ]
+                }
+            ]
+        }
+    ]
+}

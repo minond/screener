@@ -1,0 +1,11 @@
+{
+  "name": "screener",
+  "version": "0.0.0",
+  "description": "",
+  "dependencies": {
+    "phantomjs": "~1.9.7-1",
+    "image-diff": "~1.0.1",
+    "yaml": "~0.2.3",
+    "lodash": "~2.4.1"
+  }
+}
