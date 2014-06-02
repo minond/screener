@@ -29,7 +29,7 @@ try {
     phantom.exit(1);
 }
 
-lodash.each(normalized, function (info, label) {
+lodash.each(normalized, function (test, label) {
     log.debug('testing', label);
-    runner.execute(label, dir, info.url, info.executions, page, phantom);
+    runner.execute(label, dir, test, page, phantom);
 });
