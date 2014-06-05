@@ -5,28 +5,11 @@
         },
         "tests": {
             "set value of search field": [
-                {
-                    "value": [
-                        "input[name=q]",
-                        "PhantomJS"
-                    ]
-                },
-                {
-                    "css": [
-                        "input[name=q]",
-                        "border",
-                        "2px solid red"
-                    ]
-                }
+                { "value": [ "input[name=q]", "PhantomJS" ] },
+                { "css": [ "input[name=q]", "border", "2px solid red" ] }
             ],
             "color all divs in page": [
-                {
-                    "css": [
-                        "div",
-                        "background-color",
-                        "blue"
-                    ]
-                }
+                { "css": [ "div", "background-color", "blue" ] }
             ]
         }
     }
