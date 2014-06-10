@@ -1,0 +1,86 @@
+#!/usr/bin/env node
+// vi:syntax=javascript
+
+'use strict';
+
+var CMD_PHANTOMJS = 'node_modules/.bin/phantomjs',
+    ARGS_SNAPSHOT = ['src/snapshot.js'];
+
+var screener = require('commander'),
+    spawn = require('child_process').spawn,
+    path = require('path'),
+    lodash = require('lodash'),
+    runner = require('./lib/runner'),
+    config = require('./lib/config.json'),
+    pkg = require('./package.json');
+
+screener
+    .version(pkg.version)
+    .option('-c, --config [file]', 'configuration file', config.DEFAULT_TESTS_FILE)
+    .option('-o, --output [directory]', 'images are saved here', config.DEFAULT_OUT_DIR)
+
+screener
+    .command('build')
+    .description('build tests')
+    .action(function () {
+        var ProgressBar = require('progress'),
+            bar;
+
+        var snapshot = spawn(CMD_PHANTOMJS, ARGS_SNAPSHOT),
+            tests = require(path.resolve('.', screener.config)),
+            pass_count = 0,
+            total = 0;
+
+        lodash.each(tests, function (config, group) {
+            total += Object.keys(config.tests).length;
+        });
+
+        bar = new ProgressBar('testing [:bar] :current/:total', {
+            total: total,
+            width: 50
+        });
+
+        snapshot.stdout.on('data', function (data) {
+            // probably not the best way...
+            switch (data.toString().trim()) {
+                case 'pass':
+                    bar.tick();
+                    pass_count++;
+                    break;
+
+                case 'fail':
+                    bar.tick();
+                    break;
+            }
+        });
+
+        snapshot.on('close', function () {
+            console.log('');
+            console.log('%s of %s ok', pass_count, total);
+            process.exit(pass_count === total ? 0 : 1);
+        });
+    });
+
+screener
+    .command('show')
+    .description('show tests information')
+    .action(function (options) {
+        var Table = require('cli-table'),
+            tests = require(path.resolve('.', screener.config));
+
+        var table = new Table({
+                style: { head: ['white'] },
+                head: ['Group', 'Test', 'File']
+            });
+
+        lodash.each(tests, function (config, group) {
+            lodash.each(config.tests, function (test, label) {
+                table.push([ group, label, runner.get_file_name(
+                    screener.output, group, label) ]);
+            });
+        });
+
+        console.log(table.toString());
+    });
+
+screener.parse(process.argv);
