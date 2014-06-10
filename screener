@@ -3,83 +3,10 @@
 
 'use strict';
 
-var CMD_PHANTOMJS = 'node_modules/.bin/phantomjs',
-    ARG_SNAPSHOT = 'src/snapshot.js';
-
 var screener = require('commander'),
-    spawn = require('child_process').spawn,
-    path = require('path'),
-    lodash = require('lodash'),
-    runner = require('./lib/runner'),
     config = require('./config/config.json'),
-    pkg = require('./package.json');
-
-function normalize (tests) {
-    var normal = [];
-
-    lodash.each(tests, function (config, group) {
-        lodash.each(config.tests, function (test, label) {
-            normal.push({
-                group: group,
-                label: label,
-                file: runner.get_file_name(screener.output, group, label)
-            });
-        });
-    });
-
-    return normal;
-}
-
-function show (options) {
-    var Table = require('cli-table'),
-        tests = normalize(require(path.resolve('.', screener.config)));
-
-    var table = new Table({
-            style: { head: ['white'] },
-            head: ['Group', 'Test', 'File']
-        });
-
-    lodash.each(tests, function (test) {
-        table.push([ test.group, test.label, test.file ]);
-    });
-
-    console.log(table.toString());
-}
-
-function build () {
-    var ProgressBar = require('progress');
-
-    var args = [ARG_SNAPSHOT, screener.config, screener.output],
-        snapshot = spawn(CMD_PHANTOMJS, args),
-        tests = normalize(require(path.resolve('.', screener.config))),
-        total = tests.length,
-        pass_count = 0;
-
-    var bar = new ProgressBar('testing [:bar] :current/:total', {
-        total: total,
-        width: 50
-    });
-
-    snapshot.stdout.on('data', function (data) {
-        // probably not the best way...
-        switch (data.toString().trim()) {
-            case 'pass':
-                bar.tick();
-                pass_count++;
-                break;
-
-            case 'fail':
-                bar.tick();
-                break;
-        }
-    });
-
-    snapshot.on('close', function () {
-        console.log('');
-        console.log('%s of %s ok', pass_count, total);
-        process.exit(pass_count === total ? 0 : 1);
-    });
-}
+    pkg = require('./package.json'),
+    cli = require('./lib/cli');
 
 screener
     .version(pkg.version)
@@ -89,11 +16,11 @@ screener
 screener
     .command('build')
     .description('build tests')
-    .action(build);
+    .action(cli.build(screener));
 
 screener
     .command('show')
     .description('show tests information')
-    .action(show);
+    .action(cli.show(screener));
 
 screener.parse(process.argv);
