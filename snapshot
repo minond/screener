@@ -1,3 +1,6 @@
+#!/usr/bin/env ./node_modules/.bin/phantomjs
+// vi:syntax=javascript
+
 'use strict';
 
 /**
@@ -10,9 +13,9 @@ var webpage = require('webpage'),
     system = require('system'),
     lodash = require('lodash'),
     fs = require('fs'),
-    log = require('../lib/log'),
-    runner = require('../lib/runner'),
-    config = require('../config/config.json');
+    log = require('./lib/log'),
+    runner = require('./lib/runner'),
+    config = require('./config/config.json');
 
 var pwd = fs.workingDirectory + fs.separator,
     file = pwd + (system.args[1] || config.DEFAULT_TESTS_FILE),
