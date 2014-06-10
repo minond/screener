@@ -2,6 +2,9 @@
   "name": "screener",
   "version": "0.0.0",
   "description": "",
+  "bin": {
+    "screener": "./screener"
+  },
   "dependencies": {
     "phantomjs": "~1.9.7-1",
     "image-diff": "~1.0.1",
