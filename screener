@@ -23,4 +23,9 @@ screener
     .description('show tests information')
     .action(cli.show(screener));
 
+screener
+    .command('test')
+    .description('take screenshots and compare them to the originals')
+    .action(cli.test(screener));
+
 screener.parse(process.argv);
