@@ -6,19 +6,17 @@
  */
 
 /* global phantom */
-var DEFAULT_OUT_DIR = '.tmp',
-    DEFAULT_TESTS_FILE = 'screener.json';
-
 var webpage = require('webpage'),
     system = require('system'),
     lodash = require('lodash'),
     fs = require('fs'),
-    log = require('../lib/log.js'),
-    runner = require('../lib/runner.js');
+    log = require('../lib/log'),
+    runner = require('../lib/runner'),
+    config = require('../lib/config.json');
 
 var pwd = fs.workingDirectory + fs.separator,
-    file = pwd + (system.args[1] || DEFAULT_TESTS_FILE),
-    dir = pwd + (system.args[2] || DEFAULT_OUT_DIR),
+    file = pwd + (system.args[1] || config.DEFAULT_TESTS_FILE),
+    dir = pwd + (system.args[2] || config.DEFAULT_OUT_DIR),
     normalized = {},
     tests = {};
 

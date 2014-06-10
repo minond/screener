@@ -1,0 +1,4 @@
+{
+    "DEFAULT_OUT_DIR": ".tmp",
+    "DEFAULT_TESTS_FILE": "screener.json"
+}
