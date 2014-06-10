@@ -4,14 +4,14 @@
 'use strict';
 
 var CMD_PHANTOMJS = 'node_modules/.bin/phantomjs',
-    ARGS_SNAPSHOT = ['src/snapshot.js'];
+    ARG_SNAPSHOT = 'src/snapshot.js';
 
 var screener = require('commander'),
     spawn = require('child_process').spawn,
     path = require('path'),
     lodash = require('lodash'),
     runner = require('./lib/runner'),
-    config = require('./lib/config.json'),
+    config = require('./config/config.json'),
     pkg = require('./package.json');
 
 screener
@@ -26,7 +26,8 @@ screener
         var ProgressBar = require('progress'),
             bar;
 
-        var snapshot = spawn(CMD_PHANTOMJS, ARGS_SNAPSHOT),
+        var args = [ARG_SNAPSHOT, screener.config, screener.output],
+            snapshot = spawn(CMD_PHANTOMJS, args),
             tests = require(path.resolve('.', screener.config)),
             pass_count = 0,
             total = 0;

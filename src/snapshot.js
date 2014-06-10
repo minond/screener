@@ -12,7 +12,7 @@ var webpage = require('webpage'),
     fs = require('fs'),
     log = require('../lib/log'),
     runner = require('../lib/runner'),
-    config = require('../lib/config.json');
+    config = require('../config/config.json');
 
 var pwd = fs.workingDirectory + fs.separator,
     file = pwd + (system.args[1] || config.DEFAULT_TESTS_FILE),
