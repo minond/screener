@@ -1,17 +1,27 @@
 {
   "name": "screener",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
-  "bin": {
-    "screener": "./screener"
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
   },
-  "dependencies": {
-    "phantomjs": "~1.9.7-1",
-    "image-diff": "~1.0.1",
+  "devDependencies": {
+    "grunt-mkdir": "~0.1.2",
+    "merge-defaults": "~0.2.1",
+    "grunt-exec": "~0.4.6",
+    "expect.js": "~0.3.1",
+    "grunt-contrib-clean": "~0.6.0",
+    "json5": "~0.2.0",
     "lodash": "~2.4.1",
-    "commander": "~2.2.0",
-    "cli-table": "~0.3.0",
-    "progress": "~1.1.5",
-    "cli-color": "~0.3.2"
+    "load-grunt-tasks": "~1.0.0",
+    "glob": "~4.0.6",
+    "grunt": "~0.4.5",
+    "mocha": "~2.0.1",
+    "istanbul": "~0.3.2",
+    "coveralls": "~2.11.2",
+    "grunt-complexity": "~0.2.0",
+    "grunt-spell": "~0.2.1",
+    "grunt-contrib-jshint": "~0.10.0"
   }
 }

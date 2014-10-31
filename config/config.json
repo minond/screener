@@ -1,4 +1,0 @@
-{
-    "DEFAULT_OUT_DIR": "tests/screenshots",
-    "DEFAULT_TESTS_FILE": "tests/screenshots/screener.json"
-}
