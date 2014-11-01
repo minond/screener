@@ -23,5 +23,9 @@
     "grunt-complexity": "~0.2.0",
     "grunt-spell": "~0.2.1",
     "grunt-contrib-jshint": "~0.10.0"
+  },
+  "dependencies": {
+    "commander": "~2.5.0",
+    "acm": "~1.2.0"
   }
 }
