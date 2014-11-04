@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source vendor/minond/expect/expect
+
+expect $(
+  phantomjs snapshot.js http://c2.com/ build/snapshots/c2.png;
+  diff tests/snapshots/c2.png build/snapshots/c2.png
+) to pass
+
+expect $(
+  phantomjs snapshot.js https://www.google.com/images/srpr/logo11w.png build/snapshots/google.png;
+  diff tests/snapshots/google.png build/snapshots/google.png
+) to pass

@@ -5,10 +5,10 @@ node_js:
 
 before_script:
   - npm install -g grunt-cli
-  - npm install
+  - make install
 
 after_success:
   - cat build/tests/js/report/lcov.info | ./node_modules/.bin/coveralls
 
 script:
-  - grunt
+  - make

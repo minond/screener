@@ -1,3 +1,6 @@
 [submodule "vendor/minond/scaffold"]
 	path = vendor/minond/scaffold
 	url = http://github.com/minond/scaffold
+[submodule "vendor/minond/expect"]
+	path = vendor/minond/expect
+	url = https://github.com/minond/expect
