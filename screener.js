@@ -41,8 +41,9 @@ phantomjs.create(function (phantom) {
                     return $('div').text();
                 }, function () {
                     console.log(arguments);
-                    // page.render(file);
-                    phantom.exit();
+                    page.render(file, function () {
+                        phantom.exit();
+                    });
                 });
             });
         });
