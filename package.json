@@ -26,6 +26,9 @@
   },
   "dependencies": {
     "commander": "~2.5.0",
-    "acm": "~1.2.0"
+    "acm": "~1.2.0",
+    "image-diff": "~1.0.1",
+    "debug": "~2.1.0",
+    "phantom": "~0.7.0"
   }
 }
