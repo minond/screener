@@ -7,7 +7,6 @@ clean:
 
 test:
 	grunt test
-	bash tests/snapshots_test
 
 lint:
 	grunt quality
