@@ -1,16 +1,18 @@
 'use strict';
 
-var SELENIUM_JAR = './bin/selenium-server-standalone-2.42.1.jar',
-    SELENIUM_PORT = 4444;
+var acm = require('acm');
+
+var selenium_jar = acm.get('screener.selenium.jar') || './bin/selenium-server-standalone-2.42.1.jar',
+    selenium_port = acm.get('screener.selenium.port') || 4444;
 
 var debug = require('debug')('screener:server'),
     SeleniumServer = require('selenium-webdriver/remote').SeleniumServer;
 
-var server = new SeleniumServer(SELENIUM_JAR, {
-    port: SELENIUM_PORT
+var server = new SeleniumServer(selenium_jar, {
+    port: selenium_port
 });
 
-debug('starting selenium server on port %s', SELENIUM_PORT);
+debug('starting selenium server on port %s', selenium_port);
 server.start();
 
 module.exports = server;

@@ -17,6 +17,20 @@ function save(file) {
 }
 
 /**
+ * generates a function that logs text next time it is called
+ * @function ddebug
+ * @param {*} args*
+ * @return {Function} logs on execution
+ */
+function ddebug() {
+    var args = arguments;
+
+    return function ldebug() {
+        return debug.apply(debug, args);
+    };
+}
+
+/**
  * @function snapshot
  * @param {String} url
  * @param {String} file
@@ -26,12 +40,12 @@ function save(file) {
 module.exports = function snapshot(url, file, capability) {
     var driver = require('./driver')(capability);
 
-    debug('loading %s', url);
-    driver.get('http://www.google.com');
+    driver.get(url)
+        .then(ddebug('loaded %s', url));
 
-    driver.takeScreenshot().then(save(file));
+    driver.takeScreenshot()
+        .then(save(file));
 
-    driver.close(function () {
-        debug('closing driver');
-    });
+    driver.close()
+        .then(ddebug('closing driver'));
 };
